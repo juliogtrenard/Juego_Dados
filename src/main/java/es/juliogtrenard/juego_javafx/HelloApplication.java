@@ -1,8 +1,6 @@
 package es.juliogtrenard.juego_javafx;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -52,43 +50,39 @@ public class HelloApplication extends Application {
         Label lblGanador = new Label("");
 
         //Colocar el nombre al jugador cuando se presiona enter
-        txtNombre.setOnAction(new EventHandler<>() {
-            public void handle(ActionEvent e) {
-                lblPjPrincipal.setText(txtNombre.getText());
-            }
-        });
+        txtNombre.setOnAction(_ -> lblPjPrincipal.setText(txtNombre.getText()));
 
         //Tirar dados cuando se presiona el botón de jugar
-        btnJugar.setOnAction(new EventHandler<>() {
-            public void handle(ActionEvent e) {
-                Random r = new Random();
-                int puntaje1 = r.nextInt(6) + 1;
-                int puntaje2 = r.nextInt(6) + 1;
+        btnJugar.setOnAction(_ -> {
+            Random r = new Random();
+            int puntaje1 = r.nextInt(6) + 1;
+            int puntaje2 = r.nextInt(6) + 1;
 
-                while(puntaje1 == puntaje2) {
-                    puntaje1 = r.nextInt(6) + 1;
-                    puntaje2 = r.nextInt(6) + 1;
+            while(puntaje1 == puntaje2) {
+                puntaje1 = r.nextInt(6) + 1;
+                puntaje2 = r.nextInt(6) + 1;
+            }
+
+            puntos1.setText("Puntuación: " + puntaje1);
+            puntos2.setText("Puntuación: " + puntaje2);
+
+            if(puntaje1 > puntaje2) {
+                cantVidaPjEnemigo--;
+                lblVidaPjEnemigo.setText("Vida: " + cantVidaPjEnemigo);
+                lblVidaPjEnemigo.setTextFill(Color.RED);
+
+                if(cantVidaPjEnemigo == 0) {
+                    lblGanador.setText("GANASTE");
+                    continuar = false;
                 }
+            } else {
+                cantVidaPjPrincipal--;
+                lblVidaPjPrincipal.setText("Vida: " + cantVidaPjPrincipal);
+                lblVidaPjPrincipal.setTextFill(Color.RED);
 
-                puntos1.setText("Puntuación: " + puntaje1);
-                puntos2.setText("Puntuación: " + puntaje2);
-
-                if(puntaje1 > puntaje2) {
-                    cantVidaPjEnemigo--;
-                    lblVidaPjEnemigo.setText("Vida: " + cantVidaPjEnemigo);
-                    lblVidaPjEnemigo.setTextFill(Color.RED);
-
-                    if(cantVidaPjEnemigo == 0) {
-                        lblGanador.setText("GANASTE");
-                    }
-                } else {
-                    cantVidaPjPrincipal--;
-                    lblVidaPjPrincipal.setText("Vida: " + cantVidaPjPrincipal);
-                    lblVidaPjPrincipal.setTextFill(Color.RED);
-
-                    if(cantVidaPjPrincipal == 0) {
-                        lblGanador.setText("PERDISTE");
-                    }
+                if(cantVidaPjPrincipal == 0) {
+                    lblGanador.setText("PERDISTE");
+                    continuar = false;
                 }
             }
         });
