@@ -42,7 +42,7 @@ public class HelloApplication extends Application {
         Label lblPjEnemigo = new Label("Enemigo");
 
         Label lblVidaPjPrincipal = new Label("Vida: " + cantVidaPjPrincipal);
-        Label lblVidaPjEnemigo = new Label("vida: " + cantVidaPjEnemigo);
+        Label lblVidaPjEnemigo = new Label("Vida: " + cantVidaPjEnemigo);
 
         Label puntos1 = new Label("Puntuación: ");
         Label puntos2 = new Label("Puntuación: ");
@@ -65,6 +65,11 @@ public class HelloApplication extends Application {
                 int puntaje1 = r.nextInt(6) + 1;
                 int puntaje2 = r.nextInt(6) + 1;
 
+                while(puntaje1 == puntaje2) {
+                    puntaje1 = r.nextInt(6) + 1;
+                    puntaje2 = r.nextInt(6) + 1;
+                }
+
                 puntos1.setText("Puntuación: " + puntaje1);
                 puntos2.setText("Puntuación: " + puntaje2);
 
@@ -74,7 +79,7 @@ public class HelloApplication extends Application {
                     lblVidaPjEnemigo.setTextFill(Color.RED);
 
                     if(cantVidaPjEnemigo == 0) {
-                        lblGanador.setText("Ganaste");
+                        lblGanador.setText("GANASTE");
                     }
                 } else {
                     cantVidaPjPrincipal--;
@@ -82,7 +87,7 @@ public class HelloApplication extends Application {
                     lblVidaPjPrincipal.setTextFill(Color.RED);
 
                     if(cantVidaPjPrincipal == 0) {
-                        lblGanador.setText("Perdiste");
+                        lblGanador.setText("PERDISTE");
                     }
                 }
             }
