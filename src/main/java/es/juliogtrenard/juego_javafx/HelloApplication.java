@@ -16,11 +16,13 @@ import java.util.Random;
  */
 public class HelloApplication extends Application {
     /**
-     * Variables para almacenar la cantidad de vida del jugador, enemigo y seguir jugando
+     * Variable para almacenar la cantidad de vida del jugador
      */
     private int cantVidaPjPrincipal = 5;
+    /**
+     * Variable para almacenar la cantidad de vida del enemigo
+     */
     private int cantVidaPjEnemigo = 5;
-    private boolean continuar = true;
 
     /**
      * Método de inicio
@@ -73,7 +75,7 @@ public class HelloApplication extends Application {
 
                 if(cantVidaPjEnemigo == 0) {
                     lblGanador.setText("GANASTE");
-                    continuar = false;
+                    btnJugar.setDisable(true);
                 }
             } else {
                 cantVidaPjPrincipal--;
@@ -82,7 +84,7 @@ public class HelloApplication extends Application {
 
                 if(cantVidaPjPrincipal == 0) {
                     lblGanador.setText("PERDISTE");
-                    continuar = false;
+                    btnJugar.setDisable(true);
                 }
             }
         });
