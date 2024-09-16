@@ -12,21 +12,27 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
 
+/**
+ * Aplicación de JavaFX con dos personajes, el jugador y un enemigo, se tiran dos dados y el que tenga peor puntaje
+ * pierde una vida. Si la vida llega a 0 se acaba el juego.
+ */
 public class HelloApplication extends Application {
     /**
-     *
+     * Variables para almacenar la cantidad de vida del jugador, enemigo y seguir jugando
      */
     private int cantVidaPjPrincipal = 5;
     private int cantVidaPjEnemigo = 5;
+    private boolean continuar = true;
 
     /**
-     *
-     * @param stage
+     * Método de inicio
+     * @param stage Escenario principal de la ventana
      */
     @Override
     public void start(Stage stage) {
         stage.setTitle("Juego en JavaFX");
 
+        //Contenedor y elementos del juego
         VBox contenedorV = new VBox();
 
         Label lblNombre = new Label("Ingresa tu nombre:");
@@ -45,12 +51,14 @@ public class HelloApplication extends Application {
 
         Label lblGanador = new Label("");
 
+        //Colocar el nombre al jugador cuando se presiona enter
         txtNombre.setOnAction(new EventHandler<>() {
             public void handle(ActionEvent e) {
                 lblPjPrincipal.setText(txtNombre.getText());
             }
         });
 
+        //Tirar dados cuando se presiona el botón de jugar
         btnJugar.setOnAction(new EventHandler<>() {
             public void handle(ActionEvent e) {
                 Random r = new Random();
@@ -80,9 +88,11 @@ public class HelloApplication extends Application {
             }
         });
 
+        //Agrega los elementos al contenedor
         contenedorV.getChildren().addAll(lblNombre, txtNombre, lblPjPrincipal, lblVidaPjPrincipal, puntos1, lblPjEnemigo,
                 lblVidaPjEnemigo, puntos2, btnJugar, lblGanador);
 
+        //Establece la escena en el escenario y lo muestra
         Scene escena = new Scene(contenedorV, 300, 300);
 
         stage.setScene(escena);
@@ -90,6 +100,10 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Llamada al método launch para iniciar la aplicación
+     * @param args Argumentos en la linea de comandos
+     */
     public static void main(String[] args) {
         launch();
     }
